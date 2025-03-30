@@ -1,7 +1,7 @@
 {
   "layer": "bottom",
-  "position": "top",
-  "height": 30,
+  "position": "bottom",
+  "height": 20,
   "spacing": 0,
   "exclusive": true,
   "gtk-layer-shell": true,
@@ -12,9 +12,11 @@
   "modules-right": [
     "cpu",
     "memory",
+    "network",
     "pulseaudio",
     "clock",
     "clock#simpleclock",
+    "battery",
     "tray",
     "custom/notification",
     "custom/power",
@@ -47,10 +49,10 @@
   },
   "clock#simpleclock": {
     "tooltip": false,
-    "format": " {:%H:%M}",
+    "format": "  {:%H:%M}",
   },
   "clock": {
-    "format": " {:L%a %d %b}",
+    "format": "  {:L%a %d %b}",
     "calendar": {
       "format": {
         "days": "<span weight='normal'>{}</span>",
@@ -66,19 +68,38 @@
     "tooltip-format": "<span color='#cdd6f4' font='Lexend 11'><tt><small>{calendar}</small></tt></span>",
   },
   "cpu": {
-    "format": " {usage}%",
+    "format": "  {usage}%",
     "tooltip": true,
     "interval": 1,
   },
   "memory": {
     "format": " {used:0.1f}Gi",
   },
+  "battery": {
+    "states": {
+      "warning": 30,
+     	"critical": 15
+    },
+     "format": "{icon} {capacity}%",
+     "format-charging": "{capacity}%",
+     "format-plugged": "{capacity}%",
+     "format-alt": "{time} {icon}",
+     "format-full": " {capacity}%",
+     "format-icons": ["", "", ""]
+	},
+  "network": {
+    "format-wifi": "  {essid}",
+    "format-ethernet": "{ifname}: {ipaddr}/{cidr} ",
+    "format-linked": "{ifname} (No IP) ",
+    "format-disconnected": " Disconnected",
+    "format-alt": "{ifname}: {ipaddr}/{cidr}"
+	},
   "pulseaudio": {
     "format": "{icon} {volume}%",
     "format-muted": "  muted",
     "format-icons": {
       "headphone": "",
-      "default": [" ", " ", " "],
+      "default": [" ", "  ", "  "],
     },
     "on-click": "pavucontrol",
   },
